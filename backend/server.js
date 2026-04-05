@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "../.env" });
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
@@ -17,9 +17,11 @@ mongoose.connect(process.env.MONGO_URI)
 
 // Import routes
 const expenseRoutes = require("./routes/expenseRoutes");
+const authRoutes = require("./routes/authRoutes");
 
 // Use routes
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/auth", authRoutes);
 
 // Test route
 app.get("/", (req, res) => {

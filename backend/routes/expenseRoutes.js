@@ -7,8 +7,11 @@ const {
     deleteExpense
 } = require("../controllers/expenseController");
 
-router.post("/", addExpense);
-router.get("/", getExpenses);
-router.delete("/:id", deleteExpense);
+const authMiddleware = require("../middleware/authMiddleware");
+
+// Protect all expense routes
+router.post("/", authMiddleware, addExpense);
+router.get("/", authMiddleware, getExpenses);
+router.delete("/:id", authMiddleware, deleteExpense);
 
 module.exports = router;
